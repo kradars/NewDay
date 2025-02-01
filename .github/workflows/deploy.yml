@@ -25,5 +25,5 @@ jobs:
 
     - name: Deploy Files to EC2
       run: |
-        scp -r ./index.html ec2-user@$SSH_HOST:/var/www/html
+        scp -r ./index.html ec2-user@$SSH_HOST:/var/www/html/
         ssh ec2-user@$SSH_HOST "sudo systemctl restart httpd"
