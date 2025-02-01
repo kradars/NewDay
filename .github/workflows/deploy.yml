@@ -18,6 +18,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         SSH_HOST: ${{ secrets.EC2_PUBLIC_IP }}
       run: |
+        echo "Connecting to EC2 instance at $SSH_HOST"
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
@@ -25,5 +26,6 @@ jobs:
 
     - name: Deploy Files to EC2
       run: |
+        echo "Deploying to EC2: $SSH_HOST"
         scp -r ./index.html ec2-user@$SSH_HOST:/var/www/html
         ssh ec2-user@$SSH_HOST "sudo systemctl restart httpd"
